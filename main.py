@@ -1,6 +1,11 @@
 # Complete project details at https://RandomNerdTutorials.com
 
 def web_page():
+  d.measure()
+  temperature = d.temperature()
+  humidity = d.humidity()
+  print('== temperature =>', temperature)
+  print('== humidity =>', humidity)
   if led.value() == 1:
     gpio_state="ON"
   else:
@@ -12,7 +17,7 @@ def web_page():
   border-radius: 4px; color: white; padding: 16px 40px; text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}
   .button2{background-color: #4286f4;}</style></head><body> <h1>ESP Web Server</h1> 
   <p>GPIO state: <strong>""" + gpio_state + """</strong></p><p><a href="/?led=on"><button class="button">ON</button></a></p>
-  <p><a href="/?led=off"><button class="button button2">OFF</button></a></p></body></html>"""
+  <p><a href="/?led=off"><button class="button button2">OFF</button></a></p><p>Temperature: """ + str(temperature) +  """ &deg;C <br /> Humidity: """ + str(humidity) + """ %</p></body></html>"""
   return html
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -27,6 +32,7 @@ while True:
   print('Content = %s' % request)
   led_on = request.find('/?led=on')
   led_off = request.find('/?led=off')
+  time.sleep(0.25)
   if led_on == 6:
     print('LED ON')
     led.value(1)

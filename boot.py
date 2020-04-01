@@ -5,10 +5,12 @@ try:
 except:
   import socket
 
-from machine import Pin
 import network
+from dht import DHT11
+from machine import Pin
 
 import esp
+import time
 esp.osdebug(None)
 
 import gc
@@ -29,3 +31,4 @@ print('Connection successful')
 print(station.ifconfig())
 
 led = Pin(14, Pin.OUT)
+d = DHT11(Pin(4, Pin.IN, Pin.PULL_UP))
