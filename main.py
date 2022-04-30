@@ -1,11 +1,18 @@
 # Complete project details at https://RandomNerdTutorials.com
 
 def web_page():
-  sensor.measure()
-  temperature = sensor.temperature()
-  humidity = sensor.humidity()
-  print('== temperature =>', temperature)
-  print('== humidity =>', humidity)
+  retry = 0
+  while retry < 5:
+    try:
+        sensor.measure()
+        break
+    except:
+        retry = retry + 1
+        print(".", end="")
+  print()
+  
+  temperature, humidity = sensor.temperature(), sensor.humidity()
+  print(f't: {temperature} *C & RH: {humidity} %')
   
   html = """<html><head><title>ESP Web Server</title><meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="data:,"> <style>html{font-family: Helvetica; display:inline-block; margin: 0px auto; text-align: center;}
