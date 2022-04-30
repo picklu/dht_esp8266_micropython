@@ -16,13 +16,12 @@ esp.osdebug(None)
 import gc
 gc.collect()
 
-ssid = "reachman"
-password = "OhReally@2019"
+import credentials as creds
 
 station = network.WLAN(network.STA_IF)
 
 station.active(True)
-station.connect(ssid, password)
+station.connect(creds.ssid, creds.password)
 
 while station.isconnected() == False:
   pass
@@ -30,5 +29,4 @@ while station.isconnected() == False:
 print('Connection successful')
 print(station.ifconfig())
 
-led = Pin(14, Pin.OUT)
-d = DHT11(Pin(4, Pin.IN, Pin.PULL_UP))
+sensor = DHT11(Pin(4, Pin.IN, Pin.PULL_UP))
